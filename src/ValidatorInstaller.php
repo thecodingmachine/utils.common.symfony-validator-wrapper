@@ -20,6 +20,11 @@ class ValidatorInstaller implements PackageInstallerInterface {
 	 * @see \Mouf\Installer\PackageInstallerInterface::install()
 	 */
 	public static function install(MoufManager $moufManager) {
-
+		// Let's create the instances.
+		$validator = InstallUtils::getOrCreateInstance('validator', null, $moufManager);
+		$validator->setCode('return Symfony\\Component\\Validator\\Validation::createValidatorBuilder()->enableAnnotationMapping($container->get(\'annotationReader\'))->getValidator();');
+		
+		// Let's rewrite the MoufComponents.php file to save the component
+		$moufManager->rewriteMouf();
 	}
 }

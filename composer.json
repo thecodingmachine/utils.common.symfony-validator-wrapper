@@ -1,0 +1,38 @@
+{
+	"name" : "mouf/utils.common.symfony-validator-wrapper",
+	"description" : "Provide an install script for a Doctrine's AnnotationReader in Mouf Framework.",
+	"keywords" : [
+		"symfony",
+		"validator",
+		"wrapper",
+		"mouf"
+	],
+	"homepage" : "https://mouf-php.com/packages/mouf/utils.common.symfony-validator-wrapper",
+	"type" : "mouf-library",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Camille Koppel",
+			"email" : "c.koppel@thecodingmachine.com",
+			"homepage" : "http://mouf-php.com"
+		}
+	],
+	"require" : {
+		"php" : ">=5.3.0",
+		"symfony/validator" : "~2.4"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Mouf\\Utils\\Common\\Symfony\\Validator\\" : "src/"
+		}
+	},
+	"extra" : {
+		"mouf" : {
+			"install" : [{
+					"type" : "class",
+					"class": "Mouf\\Utils\\Common\\Symfony\\Validator\\ValidatorInstaller"
+				}
+			],
+			"logo" : "logo.png"
+		}
+	}
+}

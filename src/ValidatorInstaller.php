@@ -12,7 +12,7 @@ use Mouf\MoufManager;
 use Mouf\Actions\InstallUtils;
 
 /**
- * A logger class that writes messages into the php error_log.
+ * Install process that creates the "validator" instance.
  */
 class ValidatorInstaller implements PackageInstallerInterface {
 
@@ -23,7 +23,10 @@ class ValidatorInstaller implements PackageInstallerInterface {
 	public static function install(MoufManager $moufManager) {
 		// Let's create the instances.
 		$validator = InstallUtils::getOrCreateInstance('validator', null, $moufManager);
-		$validator->setCode('return Symfony\\Component\\Validator\\Validation::createValidatorBuilder()->enableAnnotationMapping($container->get(\'annotationReader\'))->getValidator();');
+		$validator->setCode('$validationBuilder = Symfony\Component\Validator\Validation::createValidatorBuilder();
+$validationBuilder->enableAnnotationMapping($container->get(\'annotationReader\'));
+$validationBuilder->setTranslator($container->get(\'symfonyTranslator\'));
+return $validationBuilder->getValidator();');
 		
 		// Let's rewrite the MoufComponents.php file to save the component
 		$moufManager->rewriteMouf();
